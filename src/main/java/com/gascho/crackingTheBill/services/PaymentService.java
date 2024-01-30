@@ -4,7 +4,11 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 import com.gascho.crackingTheBill.dtos.PaymentTotals;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+@Service
+@Component
 public class PaymentService {
 
     public PaymentTotals totalsCalculation(List<Double> userOrders, List<Double> friendOrders, double deliveryValue,
