@@ -4,6 +4,7 @@ import com.gascho.crackingTheBill.dtos.PaymentTotals;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class PaymentServiceTest {
                 isPercentualDescount
         );
 
-        assertThat(totals.getUserBill()).isEqualTo(31.92);
-        assertThat(totals.getFriendBill()).isEqualTo(6.08);
+        assertThat(totals.getUserBill()).isEqualTo(BigDecimal.valueOf(31.92));
+        assertThat(totals.getFriendBill()).isEqualTo(BigDecimal.valueOf(6.08));
     }
 }
