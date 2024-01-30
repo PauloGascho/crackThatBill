@@ -15,16 +15,10 @@ public class PaymentService {
         BigDecimal totalBillBeforeDescount = totalUserOrderValue.add(totalFriendOrderValue);
         double calculatedDescountValue = isPercentualDescount ? descountValue * 100 / totalBillBeforeDescount.doubleValue() : descountValue;
 
-//        double totalUserBill = totalUserOrderValue + calculateProportionalDelivery(totalUserOrderValue, deliveryValue, totalBillBeforeDescount) -
-//                calculateProportionalDescount(totalUserOrderValue, calculatedDescountValue, totalBillBeforeDescount);
-
         BigDecimal totalUserBill = totalUserOrderValue
                 .add(calculateProportionalDelivery(totalUserOrderValue, deliveryValue, totalBillBeforeDescount))
                 .subtract(calculateProportionalDescount(totalUserOrderValue, calculatedDescountValue, totalBillBeforeDescount));
-
-//        double totalFriendBill = totalFriendOrderValue + calculateProportionalDelivery(totalFriendOrderValue, deliveryValue, totalBillBeforeDescount) -
-//                calculateProportionalDescount(totalFriendOrderValue, calculatedDescountValue, totalBillBeforeDescount);
-
+        
         BigDecimal totalFriendBill = totalFriendOrderValue
                 .add(calculateProportionalDelivery(totalFriendOrderValue, deliveryValue, totalBillBeforeDescount))
                 .subtract(calculateProportionalDescount(totalFriendOrderValue, calculatedDescountValue, totalBillBeforeDescount));
