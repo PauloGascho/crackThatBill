@@ -15,13 +15,16 @@ public class PaymentServiceTest {
         double deliveryValue = 8.00;
         double descountValue = 20.00;
 
+        boolean isPercentualDescount = false;
+
         PaymentService paymentService = new PaymentService();
 
         PaymentTotals totals = paymentService.totalsCalculation(
                 userOrders,
                 friendOrders,
                 deliveryValue,
-                descountValue
+                descountValue,
+                isPercentualDescount
         );
 
         asserEquals(31.92, totals.getUserBill());
