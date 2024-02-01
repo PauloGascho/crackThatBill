@@ -19,13 +19,8 @@ public class PaymentService {
         BigDecimal totalBillBeforeDescount = totalUserOrderValue.add(totalFriendOrderValue);
         double calculatedDescountValue = isPercentualDescount ? descountValue * 100 / totalBillBeforeDescount.doubleValue() : descountValue;
 
-        BigDecimal totalUserBill = totalUserOrderValue
-                .add(calculateProportionalDelivery(totalUserOrderValue, deliveryValue, totalBillBeforeDescount))
-                .subtract(calculateProportionalDescount(totalUserOrderValue, calculatedDescountValue, totalBillBeforeDescount));
-        
-        BigDecimal totalFriendBill = totalFriendOrderValue
-                .add(calculateProportionalDelivery(totalFriendOrderValue, deliveryValue, totalBillBeforeDescount))
-                .subtract(calculateProportionalDescount(totalFriendOrderValue, calculatedDescountValue, totalBillBeforeDescount));
+        BigDecimal totalUserBill = calculateUserBill(totalUserOrderValue, deliveryValue, calculatedDescountValue, totalBillBeforeDescount);
+        BigDecimal totalFriendBill = calculateUserBill(totalFriendOrderValue, deliveryValue, calculatedDescountValue, totalBillBeforeDescount);
 
         return new PaymentTotals(totalUserBill, totalFriendBill);
     }
@@ -34,12 +29,14 @@ public class PaymentService {
         return valuesList.stream().map(BigDecimal::valueOf).reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-    private BigDecimal calculateProportionalDelivery(BigDecimal orderValue, double deliveryValue, BigDecimal totalBillBeforeDescount) {
-        return BigDecimal.valueOf(deliveryValue).multiply(orderValue).divide(totalBillBeforeDescount, 2, RoundingMode.HALF_EVEN);
+    public BigDecimal calculateProportionalValue(BigDecimal orderValue, double deliveryOrDescountValue, BigDecimal totalBillBeforeDescount) {
+        return BigDecimal.valueOf(deliveryOrDescountValue).multiply(orderValue).divide(totalBillBeforeDescount, 2, RoundingMode.HALF_EVEN);
     }
 
-    private BigDecimal calculateProportionalDescount(BigDecimal orderValue, double calculatedDescountValue, BigDecimal totalBillBeforeDescount) {
-        return BigDecimal.valueOf(calculatedDescountValue).multiply(orderValue).divide(totalBillBeforeDescount, 2, RoundingMode.HALF_EVEN);
+    public BigDecimal calculateUserBill(BigDecimal totalUserOrFriendOrderValue, double deliveryValue, double calculatedDescountValue, BigDecimal totalBillBeforeDescount) {
+        return totalUserOrFriendOrderValue
+                .add(calculateProportionalValue(totalUserOrFriendOrderValue, deliveryValue, totalBillBeforeDescount))
+                .subtract(calculateProportionalValue(totalUserOrFriendOrderValue, calculatedDescountValue, totalBillBeforeDescount));
     }
 
 }
