@@ -3,16 +3,16 @@
     <div>
         <form @submit.prevent="fetchData" class="simple-form">
             <label for="userValues">Valores do usuário (separados por vírgula)</label>
-            <input v-model="userValues" type="text" id="userValues" />
+            <input v-model="userValues" type="text" id="userValues" placeholder="Exemplo: 40,2"/>
 
             <label for="friendValues">Valores do amigo (separados por vírgula)</label>
-            <input v-model="friendValues" type="text" id="friendValues" />
+            <input v-model="friendValues" type="text" id="friendValues" placeholder="Exemplo: 40,2"/>
 
             <label for="deliveryValue">Valores da entrega</label>
-            <input v-model="deliveryValue" type="text" id="deliveryValue" />
+            <input v-model="deliveryValue" type="text" id="deliveryValue" placeholder="Exemplo: 8 ou 0"/>
 
             <label for="descountValue">Valores do desconto</label>
-            <input v-model="descountValue" type="text" id="descountValue" />
+            <input v-model="descountValue" type="text" id="descountValue" placeholder="Exemplo: 20 ou 0"/>
 
             <label>
             <input v-model="isPercentualDescount" type="checkbox" />
@@ -24,8 +24,8 @@
 
         <div v-if="responseData">
             <h2>Calculo:</h2>
-            <pre>Conta do usuário: {{ responseData.userBill }}</pre>
-            <pre>Conta do amigo: {{ responseData.friendBill }}</pre>
+            <pre>Conta do usuário: R$ {{ responseData.userBill }}</pre>
+            <pre>Conta do amigo: R$ {{ responseData.friendBill }}</pre>
         </div>
     </div>
 </template>

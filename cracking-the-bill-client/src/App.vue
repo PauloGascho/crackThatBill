@@ -1,6 +1,7 @@
 <template>
   <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
   <HomeForm/>
+  <a target="_blank" href="https://icons8.com/icon/105067/bill">Bill</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
 </template>
 
 <script lang="ts">
