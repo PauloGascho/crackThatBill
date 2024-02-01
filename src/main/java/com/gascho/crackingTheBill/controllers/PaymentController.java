@@ -3,6 +3,7 @@ package com.gascho.crackingTheBill.controllers;
 import com.gascho.crackingTheBill.dtos.PaymentTotals;
 import com.gascho.crackingTheBill.services.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +20,7 @@ public class PaymentController {
         this.paymentService = paymentService;
     }
 
+    @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/crackThatBill")
     public PaymentTotals calculatePayment(
             @RequestParam List<Double> userValues,
