@@ -24,7 +24,8 @@
 
         <div v-if="responseData">
             <h2>Calculo:</h2>
-            <pre>{{ responseData }}</pre>
+            <pre>Conta do usuário: {{ responseData.userBill }}</pre>
+            <pre>Conta do amigo: {{ responseData.friendBill }}</pre>
         </div>
     </div>
 </template>
